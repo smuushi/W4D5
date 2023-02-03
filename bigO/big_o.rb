@@ -88,10 +88,13 @@ def better_largest_contiguous_subsum(list)
     if (current_sum + ele) > current_sum
       current_sum = current_sum + ele
     else
-      largest_sum = current_sum
+      largest_sum = current_sum if largest_sum < current_sum
       current_sum = ele
+      if current_sum < 0
+        current_sum = ele
+      end
     end
-    
+
   end
   
   # j = i
