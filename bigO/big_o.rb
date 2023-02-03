@@ -78,43 +78,40 @@ def better_largest_contiguous_subsum(list)
   # end
 
   list.each_with_index do |ele, idx|
-    # debugger
+    debugger
     
     if idx == 0
+      # current_sum = ele
+      next
+    end
+
+    if current_sum < 0
       current_sum = ele
       next
     end
 
     if (current_sum + ele) > current_sum
       current_sum = current_sum + ele
-    else
-      largest_sum = current_sum if largest_sum < current_sum
-      current_sum = ele
-      if current_sum < 0
-        current_sum = ele
+      if current_sum > largest_sum
+        largest_sum = current_sum
       end
+    else
+      current_sum = current_sum + ele
     end
 
   end
   
-  # j = i
-  # while i < list.length
-  #   current_sum = list[i..j].sum
-  #   if current_sum > max_sum
-  #     max_sum = current_sum
-  #   end
-  #   if j < list.length
-  #     j += 1
-  #   else
-  #     i += 1
-  #   end
-  #   count += 1
-  # end
+  if current_sum > largest_sum 
+    largest_sum = current_sum
+  end
 
   return largest_sum
 
 end
 # list = [2, 2]
 
-list = [2, 3, -6, 7, -6, 7]
-p better_largest_contiguous_subsum(list) # => 8 (from [7, -6, 7])
+# list = [2, 3, -6, 7, -6, 8]
+# p better_largest_contiguous_subsum(list) # => 9 (from [7, -6, 8])
+
+list = [-5, -1, -3]
+p better_largest_contiguous_subsum(list)
